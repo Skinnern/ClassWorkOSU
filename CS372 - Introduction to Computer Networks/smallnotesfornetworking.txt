@@ -1,0 +1,98 @@
+chapter 4 is the transport layer
+acronyms
+NAT = network area translation
+CIDR = Classless InterDomain Routing
+DHCP = Dynamic Host Configuration Protocol
+
+
+
+chapter 4 includes things like
+
+ip addresses 
+subnet information
+
+
+
+
+
+subnets are determined partially by the /#, for example a /24 would be an ip of 11111111 11111111 11111111 00000000
+
+
+************************************************************************************************************************************************************************************
+chapter 5 is the routing methodologies
+acronyms
+AS = autonomous systems
+IGP = interior Gateway Protocol
+OSPF (Open Shortest Path First)
+BGP (Border Gateway Protocol)
+
+
+
+
+
+
+
+
+
+
+
+
+
+************************************************************************************************************************************************************************************
+chapter 6 is the link layer
+acronyms
+CRC = cycle reduncency check
+
+mac address = seperate from IP, used to send info to another machine that is physically connected
+
+mac protocols:
+partitioning
+taking turns
+random
+
+
+TDMA
+access channel in 'rounds'
+each station gets fixed length
+
+FDMA
+each station assigned frequency band
+unused transmission time in bands go idle
+
+polling
+master invited nodes to transmit in turn, has single point of failure, polling overhead and lots of latency
+
+token passing
+token passed around machines, if token, send message, same concerns as polling
+
+
+
+
+
+slotted aloha = on fixed sync clock, sends signals during sync
+
+pure aloha = sends when recieves
+
+csma/cd and slotted aloha compare like:
+csma/cd
+1. unsync'd
+2. carrier sense - no transmission if others are doing it
+3.collision detection
+4.random backoff
+
+slotted aloha
+1. sync'd
+2.no carrier sense
+3.no collision detection
+4.no random backoff
+
+
+bit time = time to transmit one bit through 
+
+ csma/cd algorithm
+ 1. adapter recieve datagram, creates frame
+ 2. if channel idle for 96 bit time, start the frame transmission
+ 3. if channel busy, wait until channel idle (plus 96 bit time) to transmit
+ 4. if transmits without detecting another, adapter is done with frame
+ 5. if it finds another transmission while transmitting, send 48 bit jam signal
+ 6. after exiting enters exponential backoff, selects random k, waits k*512 bit times, then returns to step 2

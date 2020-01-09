@@ -1,0 +1,4 @@
+
+ERROR: 0:34: '*' : wrong operand types no operation '*' exists that takes a left-hand operand of type '3-component vector of highp float' and a right operand of type 'uniform 4-component vector of highp float' (or there is no acceptable conversion)
+
+

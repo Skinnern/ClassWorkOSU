@@ -1,0 +1,15 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: Skinnern_CS444_Written2.aux
+The style file: plain.bst
+I couldn't open database file refs_Written1.bib
+---line 27 of file Skinnern_CS444_Written2.aux
+ : \bibdata{refs_Written1
+ :                       }
+I'm skipping whatever remains of this command
+I found no database files---while reading file Skinnern_CS444_Written2.aux
+Warning--I didn't find a database entry for "ROBERT"
+Warning--I didn't find a database entry for "BookOnFreeBsd"
+Warning--I didn't find a database entry for "JosephKong"
+Warning--I didn't find a database entry for "Understa77:online"
+Warning--I didn't find a database entry for "WhentoCo44:online"
+Warning--I didn't find a database entry for "Cryptogr64:online"
+(There were 2 error messages)

@@ -1,0 +1,38 @@
+# R code and explanation for part 4 DA#3.
+
+# Read in the lensdata.csv file.
+
+lensdata = read.csv(file.choose(), header = TRUE)
+
+# Look at the lensdata dataset. Look for the variable names.
+
+head(lensdata) # gives first 6 rows of the data and variable names.
+
+names(lensdata) # gives variable names.
+
+# Make an appropriate visual display for lens thickness.
+
+# Recall hist() or boxplot()
+
+boxplot(lensdata$thickness, main = "Lense Thickness Boxplot", col = "khaki1", ylab= "Lens Thickness")
+
+
+
+# Add a title.
+
+#already got this covered, dawg
+
+# Add color and other aesthetics if you like.
+
+# See week 3 lessons.
+
+# Calculate the mean and standard deviation. mean() and sd()
+mean(lensdata$thickness)
+sd(lensdata$thickness)
+# Perform a t test using the t.test() command.
+t.test(lensdata$thickness, mu = 3.2)
+# The format is t.test(data, mu = mu_0, alternative = "alt")
+
+# where data is a quantitative variable mu_0 is the hypothesized mean,
+
+# and alt is either less, greater or not equal (default). 

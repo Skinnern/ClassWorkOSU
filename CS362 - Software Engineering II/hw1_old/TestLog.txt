@@ -1,0 +1,300 @@
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Do you wish to repeat? please enter y/n:
+
+0 0|0 0|0 0|0 0|
+Current Array:
+
+-7475 0 0 0
+-7475 0|0 0|
+merged the arrays
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+merged the arrays
+Current Array:
+
+1111 2222 3333 1111 2222 3333 1111 3
+Do you wish to repeat? please enter y/n:
+
+merged the arrays
+Current Array:
+
+0 3832 0 0 0 0 0 0
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+merged the arrays
+Current Array:
+
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4
+merged the arrays
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|-1790088671 0|0 0|
+merged the arrays
+-1790088671 225|0 0|
+merged the arrays
+Current Array:
+
+-1790088671 225 0 0 0 0 0 0
+0 9|0 0|0 0|
+merged the arrays
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Do you wish to repeat? please enter y/n:
+
+
+Goodbye.
+0 0|
+merged the arrays
+
+merged the arrays
+Current Array:
+
+33
+merged the arrays
+Current Array:
+
+9 8 7 6 5 4 3 2
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Do you wish to repeat? please enter y/n:
+
+
+Goodbye.
+0 0|
+merged the arrays
+
+merged the arrays
+
+merged the arrays
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+merged the arrays
+Do you wish to repeat? please enter y/n:
+
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+0 0 0 0 0 0 0
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+merged the arrays
+Do you wish to repeat? please enter y/n:
+
+
+Invalid response. please type Y or N.
+Tests run: 25, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.121 sec - in edu.osu.cs362.sortBody_ESTest
+Running edu.osu.cs362.sortMain_ESTest
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Do you wish to repeat? please enter y/n:
+
+
+Goodbye.
+Current Array:
+
+9 8 7 6 5 4 3 2
+8 9|6 7|4 5|2 3|
+merged the arrays
+Current Array:
+
+8 9 6 7 4 5 2 3
+merged the arrays
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Current Array:
+
+6 7 8 2 4 5 2222 3
+Do you wish to repeat? please enter y/n:
+
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec - in edu.osu.cs362.sortMain_ESTest
+
+Results :
+
+Tests run: 28, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 01:58 min
+[INFO] Finished at: 2017-04-16T16:45:42-07:00
+[INFO] Final Memory: 24M/317M
+[INFO] ------------------------------------------------------------------------
+
+c:\Users\Nick\Google Drive\hw1\hw1a>

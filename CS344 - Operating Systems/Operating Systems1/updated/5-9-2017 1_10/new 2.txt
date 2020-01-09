@@ -1,0 +1,81 @@
+ if ( rooms[i].name[0] == '\0' )
+sscanf(line,"ROOM NAME: %s",rooms[i].name);
+
+if ( rooms[i].cons[0][0] == '\0' )
+sscanf(line,"CONNECTION 0: %s",rooms[i].cons[0]);
+
+if ( rooms[i].cons[1][0] == '\0' )
+sscanf(line,"CONNECTION 1: %s",rooms[i].cons[1]);
+
+if ( rooms[i].cons[2][0] == '\0' )
+sscanf(line,"CONNECTION 2: %s",rooms[i].cons[2]);
+
+if ( rooms[i].cons[3][0] == '\0' )
+sscanf(line,"CONNECTION 3: %s",rooms[i].cons[3]);
+
+if ( rooms[i].cons[4][0] == '\0' )
+sscanf(line,"CONNECTION 4: %s",rooms[i].cons[4]);
+
+if ( rooms[i].cons[5][0] == '\0' )
+sscanf(line,"CONNECTION 5: %s",rooms[i].cons[5]);
+
+if ( rooms[i].cons[6][0] == '\0' )
+sscanf(line,"CONNECTION 5: %s",rooms[i].cons[6]);
+
+if ( rooms[i].type[0] == '\0' )
+sscanf(line,"ROOM TYPE: %s",rooms[i].type);
+Graescale: billion ifs
+Mianton: lul
+Graescale: you can also do a for loop
+Mianton: incremuntin
+Graescale: but i had like 2 hours to do that project
+Graescale: i saved to an array
+Graescale: you can save yours to a struct
+Mianton: class today is more useless info btw
+Mianton: ESTIMATING TEST SUITE QUALITY
+
+
+
+
+//*******************************************************************
+
+char dirname[128]
+
+//Get file name
+sprintf(dirname,"skinnern.room",);
+FILE *fp = fopen(dirname, "r+");
+//getpid(),i
+//%d.
+//skinnern
+//%d
+
+
+
+for (i=0; i<7; i++){
+ if ( rooms[i].name[0] == '\0' )
+sscanf(line,"ROOM NAME: %s",rooms[i].name);
+
+if ( rooms[i].cons[0][0] == '\0' )
+sscanf(line,"CONNECTION 0: %s",rooms[i].cons[0]);
+
+if ( rooms[i].cons[1][0] == '\0' )
+sscanf(line,"CONNECTION 1: %s",rooms[i].cons[1]);
+
+if ( rooms[i].cons[2][0] == '\0' )
+sscanf(line,"CONNECTION 2: %s",rooms[i].cons[2]);
+
+if ( rooms[i].cons[3][0] == '\0' )
+sscanf(line,"CONNECTION 3: %s",rooms[i].cons[3]);
+
+if ( rooms[i].cons[4][0] == '\0' )
+sscanf(line,"CONNECTION 4: %s",rooms[i].cons[4]);
+
+if ( rooms[i].cons[5][0] == '\0' )
+sscanf(line,"CONNECTION 5: %s",rooms[i].cons[5]);
+
+if ( rooms[i].cons[6][0] == '\0' )
+sscanf(line,"CONNECTION 5: %s",rooms[i].cons[6]);
+
+if ( rooms[i].type[0] == '\0' )
+sscanf(line,"ROOM TYPE: %s",rooms[i].type);
+}

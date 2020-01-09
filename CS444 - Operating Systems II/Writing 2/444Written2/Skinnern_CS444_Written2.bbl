@@ -1,0 +1,50 @@
+\begin{thebibliography}{1}
+
+\bibitem{ROBERT}
+Robert Love.
+\newblock {\em Linux kernel development}.
+\newblock Addison-Wesley, 3 edition, 2015.
+
+\bibitem{BookOnFreeBsd}
+Marshall~Kirk McKusick, George~V. Neville-Neil, and Robert~N.M. Watson.
+\newblock {\em The Design and Implementation of the FreeBSD Operating System}.
+\newblock Addison-Wesley Professional, 2014.
+
+\bibitem{JosephKong}
+Joseph Kong.
+\newblock {\em FreeBSD device drivers: a guide for the intrepid}.
+\newblock No Starch Press, 2012.
+
+\bibitem{Understa77:online}
+Understanding the windows i/o system | microsoft press store.
+\newblock
+\url{https://www.microsoftpressstore.com/articles/article.aspx?p=2201309&seqNum=3}.
+\newblock (Accessed on 05/9/2018).
+
+\bibitem{WhentoCo44:online}
+When to complete an irp (windows drivers).
+\newblock
+\url{https://msdn.microsoft.com/en-us/library/windows/hardware/ff565653(v=vs.85).aspx}.
+\newblock (Accessed on 05/9/2018).
+
+\bibitem{ReusingI59:online}
+Reusing irps (windows drivers).
+\newblock
+\url{https://msdn.microsoft.com/en-us/library/windows/hardware/ff561107(v=vs.85).aspx}.
+\newblock (Accessed on 05/9/2018).
+
+\bibitem{Cryptogr64:online}
+Cryptographic provider types (windows).
+\newblock
+\url{https://msdn.microsoft.com/en-us/library/windows/desktop/aa380244(v=vs.85).aspx}.
+\newblock (Accessed on 05/9/2018).
+
+
+
+
+
+
+
+
+
+\end{thebibliography}

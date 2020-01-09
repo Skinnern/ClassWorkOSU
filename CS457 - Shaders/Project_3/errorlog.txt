@@ -1,0 +1,6 @@
+
+ERROR: 0:43: 'normalz' : undeclared identifier 
+ERROR: 0:43: 'dot' : no matching overloaded function found (using implicit conversion) 
+ERROR: 0:43: 'dot' : function is not known 
+
+

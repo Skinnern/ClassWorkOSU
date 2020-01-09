@@ -1,0 +1,330 @@
+? A unit test is a piece of a code (usually a method) that
+invokes another piece of code and checks the correctness
+of some assumptions afterward. If the assumptions turn
+out to be wrong, the unit test has failed.
+– A “unit” is a method or function.
+– Done during the development (coding) of a program
+
+
+? Why it is important?
+– Proper unit testing done during the development stage leads to less
+defect fixing costs and save both time and money in the end.
+
+
+? How to generate Unit Test Cases
+– Automated and Manually
+
+
+? JUnit is a framework to unit tests for Java programs
+– Writing test cases in Java
+– Executing test cases (i.e., pass/fail)
+
+
+? Test framework:
+– Test Case = “sequence of operations and inputs +
+assertions (i.e., expected output)”, and it is written in
+Java.
+– Test Suite: grouping several test cases together
+
+
+? Easy, convinced, and allows you to write code faster
+? Runs in most of IDE's
+? IntelliJ
+? Eclipse
+? Can be run and used through command-line
+? Automation of tests saves time increases quality
+
+
+@BeforeClass
+ public static void method()
+This method is executed once, before the
+start of all tests.
+@AfterClass
+ public static void method()
+This method is executed once, after all
+tests have been finished.
+@Before
+ public void method()
+This method is executed before each test.
+@After
+ public void method()
+This method is executed after each test.
+@Test
+ public void method()
+This is the test method to run
+
+
+? Assert statements:
+– Junit uses asserts to allow you to specify the error message, the expected and the
+actual result.
+
+fail(message) This method is executed once, before the
+start of all tests.
+assertTrue([message,] boolean condition) Checks that the boolean condition is true.
+assertFalse([message,] boolean condition) Checks that the boolean condition is false.
+assertEquals([message,] expected, actual) Tests that two values are the same.
+assertNull([message,] object) Checks that the object is null.
+
+– int val1 = 5; int val2 = 6; assertFalse(val1 > val2); assertEqual(val1,val2);
+– String str4 = "abc"; assertNull(str4); 
+
+
+– Includes the functionality of a build system (that compiles a
+complicated multi-file sources)
+– Manages dependencies nicely (i.e., a complex software system
+will frequently depend on the installation of various other libraries)
+– A Project Object Model or POM is the fundamental unit of work in
+Maven. It is an XML file (pom.xml) that contains information about
+the project and configuration details used by Maven to build the
+project.
+– Maven has become widely used for open-source software
+projects.
+
+
+? Maven is a command-line tool, so it is run from the Linux (or even
+Windows) command prompt:
+– Create a Project from Maven Template
+? mvn archetype:generate
+? With a project that has been set up using Maven, you might use the
+following commands (you must run mvn command from the directory
+containing the pom.xml) :
+– mvn compile - to compile your code
+– mvn test - to run your unit tests
+– mvn package - to create a JAR file that you can run
+– mvn eclipse:eclipse -to generate the following eclipse
+configuration files:.project and .classpath files
+
+
+? Disney’s Lion King, 1994 –1995
+– Problem:
+? It turns out that Disney failed to properly test the software on many
+different PC models available on the market.
+? The software worked on a few systems—likely the ones that the
+Disney programmers used to create the game—but not on the most
+common systems that the general public had.
+
+
+? NASA Mars Polar Lander, 1999
+– Problem:
+? The lander was tested by multiple teams.
+? One team tested the leg fold-down procedure and another the landing
+process from that point on.
+? The first team never looked to see if the touch-down bit was set—it wasn’t
+their area; the second team always reset the computer, clearing the bit,
+before it started its testing.
+? Both pieces worked perfectly individually, but not when put together.
+
+
+? If we were really good at programming, there would be no bugs to catch.
+People who claim that they write bug-free software probably haven’t
+programmed much.
+? Complete Testing is Possible. There might be some scenarios that are never
+executed by the test team or the client during the software development life
+cycle and may be executed once the project has been deployed.
+? A Tested Software is Bug-Free. No one can claim with absolute certainty that
+a software application is 100% bug-free even if a tester with superb testing
+skills has tested the application.
+? Missed Defects are due to Testers. It relates to Time, Cost, and
+Requirements changing Constraints.
+
+
+? Before we get to testing (our first big main topic), I want to discuss another
+method for finding bugs which is “Static Analysis”.
+? Called “static” analysis because it analyzes program code for all possible runtime
+behaviors and seeks out coding flaws “bad patterns” without running it
+– Happens to some extent every time you build a program.
+– The compiler has to analyze the code to compile and optimize it.
+? e.g., the compiler warns you about some problems that might show up
+in testing, like some unidientified varialbes, potentially bad
+transformations of the type of something like casting an integer to
+another types.
+? Analysis that runs the program is called “dynamic” analysis (testing is the most
+common dynamic analysis)
+? Differs in a few key ways:
+• Static analysis can detect possible bugs in an early stage, and catch bugs
+without a test case – just by structure of code
+• Dynamic analysis (testing) involves test cases for execution
+• Static analysis can give “false positives” – warn you about a problem that
+can’t actually show up when the program runs.
+• Dynamic analysis (testing) is about finding and fixing the defects.
+
+
+
+While the compiler does some limited “bug
+hunting” during compilation, that’s not its main
+job
+• There are dedicated tools for analyzing source code for
+bugs
+
+
+? Testing, on the other hand, requires more work
+from the programmer/test engineer
+? So why not prefer static analysis in general?
+• Static analysis is generally limited to simple
+properties – don’t reference null pointers, don’t
+go outside array bounds
+• Also good for some security properties.
+• But very hard/impossible to check things like
+“this sort routine really sorts things”
+
+
+Why Testing?
+? Ideally: we prove code correct, using formal
+mathematical techniques (with a computer, not chalk).
+? Formal verification is the process of checking whether a
+design (an algorithm) satisfies some requirements
+(properties).
+? Extremely difficult: for some trivial programs (100 lines)
+and many small (5K lines) programs
+
+
+Model Checking
+? Nearly ideally: use symbolic or abstract model checking to prove the system
+correct
+? Automatically extracts a mathematical abstraction from a system/program
+? Proves properties over all possible executions
+? In practice, can work well for very simple properties (“this program never
+crashes in this particular way”), but can’t handle complex properties (“this
+is a working file system”)
+? Doesn’t work well for programs with complex data structures (like a file
+system)
+
+
+As a last resort…
+? … we can actually run the program, to see
+if it works
+? This is software testing
+– Always necessary, even when you can prove
+correctness – because the proof is seldom
+directly tied to the actual code that runs
+
+
+? What is software testing?
+? Running a program
+? in order to find faults
+
+? Software testing is a critical element of software quality
+assurance.
+? Contrary to life-cycle models, testing is an activity that must
+be carried out throughout the life-cycle.
+
+
+Stages of testing
+1.Unit testing is designed to assess the units produced by the
+implementation phase and is the “lowest” level of testing.
+2.Module testing is designed to assess individual modules in isolation,
+including how the component units interact with each other and their
+associated data structures.
+3.Integration testing is designed to assess whether the interfaces
+between modules in a given subsystem have consistent assumptions
+and communicate correctly.
+4.System testing is designed to determine whether the assembled
+system meets its specifications. It assumes that the pieces work
+individually, and asks if the system works as a whole.
+5.Acceptance testing is designed to determine whether the completed
+software in fact meets these needs. In other words, acceptance testing
+is performed in a user environment and using real data.
+
+
+Why is Testing Hard?
+? Because the only way to be SURE a program has no bugs
+is to run all possible executions.
+? We can’t do that
+? Exhaustive testing is infeasible. The space of possible test
+cases is generally too big to cover exhaustively.
+? One of the most important limitations of software testing is
+that testing can show only the presence of failures, not
+their absence.
+
+
+Example: File System Testing
+? File system is a library, called by other components of
+the flight software
+? Accepts a fixed set of operations that manipulate files:
+
+
+Example: File System Testing
+? How hard would it be to just try “all” the
+possibilities?
+? Consider only core 7 operations (mkdir, rmdir,
+creat, open, close, read, write)
+? Most of these take either a file name or a
+ numeric argument, or both
+? Even for a “reasonable” (but not provably safe)
+ limitation of the parameters, there are
+ executions of length 10 to try
+? Not a realistic possibility (unless we have
+ years to test)
+
+
+Terminology
+? Fault: A condition that causes a program to fail in performing its
+required function. A fault is a passive flaw.
+– What we usually think of as “a BUG”
+? Error: A bad program state that results from a fault.
+– Not every fault always produces an error
+?
+If, for example, a programmer had meant to type char x[10];
+for a local variable , and accidentally typed char x[11];
+? That is unlikely to cause an error unless the system is very
+short of memory. It is, however, a fault.
+? Failure: An observable incorrect behavior of a program as a result
+of an error.
+? Debugging: The activity by which faults are identified and
+rectified.
+
+Terminology
+? Test (case): A test case is a set of inputs,
+execution condition, and a pass/fail
+criterion. In general, it is one execution of
+the program, that may expose a bug
+? Test suite: A test suite is a set of test
+cases. In other words, it is a set of
+executions of a program, grouped together.
+suite::tests flock:sheep
+
+
+Myths About Bugs
+? Bug Locality Hypothesis: A bug discovered within a
+component affects only that component’s behavior.
+? Corrections Abide: A corrected bug remains correct.
+? Silver Bullets: A language, design method, environment
+(e.g. Structured Coding, Strong Typing, etc) grants
+immunity from bugs.
+? Control Bug Dominance: The belief that most bugs are
+in the control structure (if, switches, etc) of programs.
+
+
+Sources of Problems
+? Requirements Definition: Erroneous, incomplete,
+inconsistent requirements.
+? Design: Fundamental design flaws in the software.
+? Support Systems: Poor programming languages, faulty
+compilers and debuggers, misleading development tools.
+? Inadequate Testing of Software: Incomplete testing,
+poor verification, mistakes in debugging.
+? Evolution: Sloppy maintenance, introduction of new
+flaws in attempts to fix old flaws.
+
+
+To Expose a Fault with a Test (RIP) Model
+? Reachability: the test much actually reach and execute
+the location of the fault
+? Infection: the fault must actually corrupt the program
+state (produce an error)
+? Propagation: the error must persist and cause an
+incorrect output – a failure
+Which tests will achieve all three?
+
+
+What is Testing?
+? What is software testing?
+– Running a program
+– In order to find faults
+– But also, in order to
+? Increase our confidence that the program has high
+quality and low risk
+? Because we can never be sure we caught all bugs
+– How does a set of executions increase confidence?
+? Sometimes, by algorithmic argument
+? Sometimes by less formal arguments

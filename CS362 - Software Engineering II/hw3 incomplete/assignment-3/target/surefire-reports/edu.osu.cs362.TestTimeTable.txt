@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: edu.osu.cs362.TestTimeTable
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in edu.osu.cs362.TestTimeTable

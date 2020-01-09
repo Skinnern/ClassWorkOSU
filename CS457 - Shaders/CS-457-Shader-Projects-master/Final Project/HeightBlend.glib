@@ -1,0 +1,35 @@
+##OpenGL GLIB
+
+Perspective 70
+LookAt 0 0 3  0 0 0  0 1 0
+
+Texture2D 1 splatmap.bmp
+Texture2D 2 SnowHeight.bmp
+Texture2D 3 BrickHeight.bmp
+Texture2D 4 SnowAlbedo.bmp
+Texture2D 5 BrickAlbedo.bmp
+Texture2D 6 SnowNormal.bmp
+Texture2D 7 BrickNormal.bmp
+Texture2D 8 SnowRoughness.bmp
+Texture2D 9 BrickRoughness.bmp
+
+Vertex		blend.vert
+Fragment	blend.frag
+Program		Height Blending				\
+		splatmap 1						\
+		mat1Height 2					\
+		mat2Height 3					\
+		mat1Diffuse 4					\
+		mat2Diffuse 5					\
+		mat1Normal 6					\
+		mat2Normal 7					\
+		mat1Roughness 8					\
+		mat2Roughness 9					\
+		LightX <-20. 5. 20.>   			\
+		LightY <-20. 10. 20.>			\
+		LightZ <-20. 20. 20.>			\
+		LightColor {1. .988 0.988 1.}	\
+		AmbientColor {.1, 0.13, .23, 1.}
+
+
+QuadXZ

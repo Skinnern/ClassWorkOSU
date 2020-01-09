@@ -1,0 +1,94 @@
+* Starting client
+* Connecting to master process on port 20627
+* Analyzing classpath: 
+  - C:/Tempa/assignment-3/out/production/main
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\charsets.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\deploy.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\access-bridge-64.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\cldrdata.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\dnsns.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\jaccess.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\jfxrt.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\localedata.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\nashorn.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\sunec.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\sunjce_provider.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\sunmscapi.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\sunpkcs11.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext\zipfs.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\javaws.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\jce.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\jfr.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\jfxswt.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\jsse.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\management-agent.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\plugin.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\resources.jar
+  - C:\Program Files\Java\jdk1.8.0_45\jre\lib\rt.jar
+  - C:\Tempa\assignment-3\out\production\main
+* Finished analyzing classpath
+* Generating tests for class edu.osu.cs362.Appt
+* Test criteria:
+  - Line Coverage
+  - Branch Coverage
+  - Exception
+  - Mutation testing (weak)
+  - Method-Output Coverage
+  - Top-Level Method Coverage
+  - No-Exception Top-Level Method Coverage
+  - Context Branch Coverage
+* Setting up search algorithm for whole suite generation
+[MASTER] 07:04:35.452 [pool-2-thread-1] WARN  TestSuiteSerialization - Cannot load tests because file does not exist: C:\Tempa\assignment-3\src\main\.evosuite\evosuite-seeds\edu.osu.cs362.Appt.seed
+* Total number of test goals: 
+  - Line 60
+  - Branch 42
+  - Exception 0
+  - MutationFactory 187
+  - Output 26
+  - Method 17
+  - MethodNoException 17
+  - CBranchFitnessFactory 42
+* Using seed 1494857072880
+* Starting evolution
+* Search finished after 105s and 1331 generations, 411002 statements, best individual has fitness: 3.5
+* Writing sequences to pool
+* Minimizing test suite
+* Going to analyze the coverage criteria
+* Coverage analysis for criterion LINE
+* Coverage of criterion LINE: 100%
+* Total number of goals: 60
+* Number of covered goals: 60
+* Coverage analysis for criterion BRANCH
+* Coverage of criterion BRANCH: 100%
+* Total number of goals: 42
+* Number of covered goals: 42
+* Coverage analysis for criterion EXCEPTION
+* Coverage of criterion EXCEPTION: 100% (no goals)
+* Coverage analysis for criterion WEAKMUTATION
+* Coverage of criterion WEAKMUTATION: 99%
+* Total number of goals: 187
+* Number of covered goals: 186
+* Coverage analysis for criterion OUTPUT
+* Coverage of criterion OUTPUT: 88%
+* Total number of goals: 26
+* Number of covered goals: 23
+* Coverage analysis for criterion METHOD
+* Coverage of criterion METHOD: 100%
+* Total number of goals: 17
+* Number of covered goals: 17
+* Coverage analysis for criterion METHODNOEXCEPTION
+* Coverage of criterion METHODNOEXCEPTION: 100%
+* Total number of goals: 17
+* Number of covered goals: 17
+* Coverage analysis for criterion CBRANCH
+* Coverage of criterion CBRANCH: 100%
+* Total number of goals: 42
+* Number of covered goals: 42
+* Generated 33 tests with total length 72
+* Resulting test suite's coverage: 98% (average coverage for all fitness functions)
+* Generating assertions
+* Resulting test suite's mutation score: 76%
+* Compiling and checking tests
+* Writing JUnit test case 'Appt_ESTest' to C:\Tempa\assignment-3\src\main\.evosuite\tmp_2017_05_15_07_02_19\tests
+* Done!
+

@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE integrations SYSTEM "..\bin\dtd\casinteg.dtd">
+<!--NBMxoAdds.xml
+	Created:	03/20/2013	DNV GL for New Brunswick Power integration with SAP
+	Updated:	01/20/2015	LER	-Added this header and connection string info; beautified code
+				05/12/2015	LER	-Updated for CIA 3.51.388.1+
+				
+-->
+<integrations>
+	<integrationdef>
+		<integrationsource>
+			<mssqlserver dbms="OLE DB" dbparm="PROVIDER='SQLOLEDB',DATASOURCE='SupportMSSQL08.DI.PRI',PROVIDERSTRING='database=NBPower';ENLIST=FALSE" userid="casdba" dbpass="casdbapass"/>
+			<!--Connection Strings:
+				NB Power:
+					<mssqlserver dbms="OLE DB" dbparm="PROVIDER='SQLOLEDB',DATASOURCE='{YourServerName}',PROVIDERSTRING='database={YourDatabaseName}';ENLIST=FALSE" userid="casdba" dbpass="casdbapass"/>			
+				DNV GL:
+					<mssqlserver dbms="OLE DB" dbparm="PROVIDER='SQLOLEDB',DATASOURCE='SupportMSSQL08.DI.PRI',PROVIDERSTRING='database=NBPower';ENLIST=FALSE" userid="cia" dbpass="ciapass"/>
+					<mssqlserver dbms="OLE DB" dbparm="PROVIDER='SQLOLEDB',DATASOURCE='SupportMSSQL08.DI.PRI',PROVIDERSTRING='database=NBPower';ENLIST=FALSE" userid="casdba" dbpass="casdbapass"/>
+
+				MS SQL Server:
+					<mssqlserver dbms="OLE DB" dbparm="PROVIDER='SQLOLEDB',DATASOURCE='{YourServerName}',PROVIDERSTRING='database={YourDatabaseName}';ENLIST=FALSE" userid="cia" dbpass="ciapass"/>
+				With Integration Source:
+					<integrationsource name="CIA" credentialsource="lookupbyname">
+						<mssqlserver dbms="OLE DB" dbparm="PROVIDER='SQLOLEDB',DATASOURCE='{YourServerName}',PROVIDERSTRING='database={YourDatabaseName}';ENLIST=FALSE"/>
+
+			-->
+		</integrationsource>
+	</integrationdef>
+	<export_casquery name="ExportMxOrdersUpdates">
+		<exportdef>
+			<srctabledef name="MxOrders" tablename="AH_CascadeToSAP_OrderUpdates"/>
+		</exportdef>
+		<srctable name="MxOrders"/>
+			<action>upsert</action>
+		<column key="true">
+			<srccolumn>CascadeOrderNumber</srccolumn>
+			<cascolumn>mxo.mxorder_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>Description</srccolumn>
+			<cascolumn>mxp.mxproc_nm</cascolumn>
+		</column>	
+		<column>
+			<srccolumn>Equipment</srccolumn>
+			<cascolumn>aeq.sapobjectid</cascolumn>
+		</column>
+		<column>
+			<srccolumn>FunctionalLocation</srccolumn>
+			<cascolumn>vf.FunctionalLocation</cascolumn>
+		</column>
+		<column>
+			<srccolumn>CascadePriority</srccolumn>
+			<cascolumn>mxo.priority_nbr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>OrderType</srccolumn>
+			<cascolumn>OrderTypeCD</cascolumn>
+		</column>
+		<column>
+			<srccolumn>PlanningPlant</srccolumn>
+			<cascolumn>PlanningPlant</cascolumn>
+		</column>
+		<column>
+			<srccolumn>SettlementReceiver</srccolumn>
+			<cascolumn>WBS_or_ActvCtr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>PlannerGroup</srccolumn>
+			<cascolumn>PlannerGroup</cascolumn>
+		</column>
+		<column>
+			<srccolumn>WorkCenter</srccolumn>
+			<cascolumn>Crew</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ActivityType</srccolumn>
+			<cascolumn>act.activ_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>NumberofPeople</srccolumn>
+			<cascolumn>coalesce(mxp.mxproc_nr, 1)</cascolumn>
+		</column>
+		<column>
+			<srccolumn>Duration</srccolumn>
+			<cascolumn>coalesce(ahwe.workestimate, mxo.STDEST_HR, 0)</cascolumn>
+		</column>
+		<column>
+			<srccolumn>BasicStartDatetime</srccolumn>
+			<cascolumn>mxo.gen_date</cascolumn>
+		</column>
+		<column>
+			<srccolumn>JobType</srccolumn>
+			<cascolumn>acnt.acnt_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>CascadeOrderStatus</srccolumn>
+			<cascolumn>mxo.status_cd</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ParentEquipmentID</srccolumn>
+			<cascolumn>
+				(CASE 
+					WHEN CASDBA.F_EQUIPGROUP_HIGHEST_PARENT(mxo.equip_id) IS NOT NULL THEN CASDBA.F_EQUIPGROUP_HIGHEST_PARENT(mxo.equip_id)
+					ELSE mxo.equip_id
+				END) AS peid
+			</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ProcedureID</srccolumn>
+			<cascolumn>mxo.MxProc_ID</cascolumn>
+		</column>
+		<column>
+			<srccolumn>SuperiorOrderNumber</srccolumn>
+			<cascolumn>mxo.wm_interface_keyval</cascolumn>
+		</column>
+		<column>
+			<srccolumn>SuperiorOrderShortDescription</srccolumn>
+			<cascolumn>
+				(CASE 
+					WHEN CASDBA.F_EQUIPGROUP_HIGHEST_PARENT(mxo.equip_id) IS NOT NULL AND mxo.gentype_cd != 'M'
+						THEN (SELECT substring(critgrp_name, 1, 40) 
+								FROM casdba.criteriagroup cg
+								JOIN casdba.triggervalues tv ON tv.critgrp_id = cg.critgrp_id
+								WHERE tv.triggerval_id = mxo.triggerval_id)
+					WHEN mxo.gentype_cd = 'M' THEN 'Manual MxOrder'
+					ELSE (SELECT SUBSTRING (critgrp_name, 1, 40) 
+							FROM casdba.criteriagroup cg
+							JOIN casdba.triggervalues tv ON tv.critgrp_id = cg.critgrp_id
+							JOIN casdba.mxorder mxo2 ON tv.triggerval_id = mxo2.triggerval_id
+							WHERE mxo.mxorder_id = mxo2.mxorder_id)
+				END) AS sosd
+			</cascolumn>
+		</column>
+		<column>
+			<srccolumn>comments</srccolumn>
+			<cascolumn>mxo.comments</cascolumn>
+		</column>
+		<column>
+			<srccolumn>mx_priority</srccolumn>
+			<cascolumn>mxo.customer_priority</cascolumn>
+		</column>
+		<cascadefrom>
+			casdba.mxorder mxo
+			join dbo.V_AH_FunctionalLocation_Flex vf on mxo.mxorder_nr=vf.mxorder_nr
+			join casdba.mxproc mxp on mxo.mxproc_id=mxp.mxproc_id
+			join casdba.all_equip aeq on mxo.equip_id=aeq.equip_id
+			left outer join casdba.activity act on mxo.activ_id = act.activ_id
+			left outer join casdba.account acnt on mxp.acnt_id = acnt.acnt_id
+			left outer join AH_FunctionalLocation_Work_Estimates ahwe on ahwe.FunctionalLocation = 
+				vf.FunctionalLocation and ahwe.ProcedureName = mxp.mxproc_nm
+		</cascadefrom>
+		<cascadewhere>
+			mxo.rm_consupd_dt > :lastrundate and
+			exists (select * from casdba.mxorder_export_status where casdba.mxorder_export_status.mxorder_id = mxo.mxorder_id and 
+			casdba.mxorder_export_status.export_status = 'S' )
+		</cascadewhere>
+		<checklastrundate label="LastMxoUpdDate"/>
+	</export_casquery>
+
+	<executesqlcommand database="cascade" name="Post-processing: Updating AH_CascadeToSAP_OrderUpdates BasicStartDatetime values..">
+		update  AH_CascadeToSAP_OrderUpdates set BasicStartDatetime = mxo.schedule_dt
+		from  AH_CascadeToSAP_OrderUpdates
+		join mxorder mxo on mxo.mxorder_nr = AH_CascadeToSAP_OrderUpdates.CascadeOrderNumber
+		where mxo.schedule_dt is not null
+	</executesqlcommand>
+	
+	<export_casquery name="ExportMxOrdersDeleted">
+		<exportdef>
+			<srctabledef name="rm_mxorder_del" tablename="AH_CascadeToSAP_OrderUpdates"/>
+		</exportdef>
+		<srctable name="rm_mxorder_del"/>
+			<action>upsert</action>
+		<column key="true">
+			<srccolumn>CascadeOrderNumber</srccolumn>
+			<cascolumn>mxdel.mxorder_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>Description</srccolumn>
+			<cascolumn>mxp.mxproc_nm</cascolumn>
+		</column>	
+		<column>
+			<srccolumn>Equipment</srccolumn>
+			<cascolumn>aeq.sapobjectid</cascolumn>
+		</column>
+		<column>
+			<srccolumn>FunctionalLocation</srccolumn>
+			<cascolumn>position.pos_no</cascolumn>
+		</column>
+		<column>
+			<srccolumn>CascadePriority</srccolumn>
+			<cascolumn>mxdel.priority_nbr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>WorkCenter</srccolumn>
+			<cascolumn>mxdel.CREWTYPE_CD</cascolumn>
+		</column>
+		<column>
+			<srccolumn>OrderType</srccolumn>
+			<cascolumn>OrderTypeCD</cascolumn>
+		</column>
+		<column>
+			<srccolumn>PlanningPlant</srccolumn>
+			<cascolumn>PlanningPlant</cascolumn>
+		</column>
+			<column>
+				<srccolumn>PlannerGroup</srccolumn>
+				<cascolumn>PlannerGroup</cascolumn>
+		</column>
+		<column>
+			<srccolumn>SettlementReceiver</srccolumn>
+			<cascolumn>WBS_or_ActvCtr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>NumberofPeople</srccolumn>
+			<cascolumn>coalesce(mxp.mxproc_nr, 1)</cascolumn>
+		</column>
+		<column>
+			<srccolumn>Duration</srccolumn>
+			<cascolumn>coalesce(mxdel.STDEST_HR, 0)</cascolumn>
+		</column>
+		<column>
+			<srccolumn>BasicStartDatetime</srccolumn>
+			<cascolumn>mxdel.gen_date</cascolumn>
+		</column>
+		<column>
+			<srccolumn>CascadeOrderStatus</srccolumn>
+			<cascolumn>'DLT'</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ActivityType</srccolumn>
+			<cascolumn>act.activ_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>JobType</srccolumn>
+			<cascolumn>acnt.acnt_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ProcedureID</srccolumn>
+			<cascolumn>mxdel.MxProc_ID</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ParentEquipmentID</srccolumn>
+			<cascolumn>casdba.F_Equipgroup_Highest_Parent(mxdel.equip_id)</cascolumn>
+		</column>
+		<column>
+			<srccolumn>SuperiorOrderNumber</srccolumn>
+			<cascolumn>mxdel.wm_interface_keyval</cascolumn>
+		</column>
+		<column>
+			<srccolumn>SuperiorOrderShortDescription</srccolumn>
+			<cascolumn>
+				(select substring(critgrp_name, 1, 40) 
+				from criteriagroup cg
+				join triggervalues tv on tv.critgrp_id = cg.critgrp_id
+				where tv.triggerval_id = mxdel.triggerval_id) AS sosd
+			</cascolumn>
+		</column>
+		<column>
+			<srccolumn>comments</srccolumn>
+			<cascolumn>mxdel.comments</cascolumn>
+		</column>
+		<column>
+			<srccolumn>mx_priority</srccolumn>
+			<cascolumn>mxdel.customer_priority</cascolumn>
+		</column>
+		<cascadefrom>
+			casdba.rm_mxorder_del mxdel
+			join dbo.V_AH_FunctionalLocation_Flex_Del vfd on mxdel.mxorder_nr  =  vfd.mxorder_nr
+			join casdba.mxproc mxp on mxdel.mxproc_id=mxp.mxproc_id
+			join casdba.all_equip aeq on mxdel.equip_id=aeq.equip_id
+			join casdba.position on position.position_id = mxdel.position_id
+			left outer join casdba.activity act on mxdel.activ_id = act.activ_id
+			left outer join casdba.account acnt on mxp.acnt_id = acnt.acnt_id
+		</cascadefrom>
+		<cascadewhere>
+			mxdel.rm_consdel_dt > :lastrundate 
+		</cascadewhere>
+		<checklastrundate label="LastMxoDelDate"/>
+	</export_casquery>
+	
+	<export_casquery name="ExportMxOrdersAdds">
+		<exportdef>
+			<srctabledef name="MxOrders" tablename="AH_CascadeToSAP_OrderAdds"/>
+		</exportdef>
+		<srctable name="MxOrders"/>
+			<action>upsert</action>
+		<column key="true">
+			<srccolumn>CascadeOrderNumber</srccolumn>
+			<cascolumn>mxo.mxorder_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>Description</srccolumn>
+			<cascolumn>mxp.mxproc_nm</cascolumn>
+		</column>	
+		<column>
+			<srccolumn>Equipment</srccolumn>
+			<cascolumn>aeq.sapobjectid</cascolumn>
+		</column>
+		<column>
+			<srccolumn>FunctionalLocation</srccolumn>
+			<cascolumn>vf.FunctionalLocation</cascolumn>
+		</column>
+		<column>
+			<srccolumn>CascadePriority</srccolumn>
+			<cascolumn>mxo.priority_nbr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>OrderType</srccolumn>
+			<cascolumn>OrderTypeCD</cascolumn>
+		</column>
+		<column>
+			<srccolumn>PlanningPlant</srccolumn>
+			<cascolumn>PlanningPlant</cascolumn>
+		</column>
+		<column>
+			<srccolumn>SettlementReceiver</srccolumn>
+			<cascolumn>WBS_or_ActvCtr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>PlannerGroup</srccolumn>
+			<cascolumn>PlannerGroup</cascolumn>
+		</column>
+		<column>
+			<srccolumn>WorkCenter</srccolumn>
+			<cascolumn>Crew</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ActivityType</srccolumn>
+			<cascolumn>act.activ_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>NumberofPeople</srccolumn>
+			<cascolumn>coalesce(mxp.mxproc_nr, 1)</cascolumn>
+		</column>
+		<column>
+			<srccolumn>Duration</srccolumn>
+			<cascolumn>coalesce(ahwe.workestimate, mxo.STDEST_HR, 0)</cascolumn>
+		</column>
+		<column>
+			<srccolumn>BasicStartDatetime</srccolumn>
+			<cascolumn>mxo.gen_date</cascolumn>
+		</column>
+		<column>
+			<srccolumn>JobType</srccolumn>
+			<cascolumn>acnt.acnt_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ProcedureID</srccolumn>
+			<cascolumn>mxo.MxProc_ID</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ParentEquipmentID</srccolumn>
+			<cascolumn>
+				(CASE 
+					WHEN casdba.f_equipgroup_highest_parent(mxo.equip_id) IS NOT NULL THEN casdba.f_equipgroup_highest_parent(mxo.equip_id)
+					ELSE mxo.equip_id
+				END) AS peid
+			</cascolumn>
+		</column>
+		<column>
+			<srccolumn>SuperiorOrderNumber</srccolumn>
+			<cascolumn>mxo.wm_interface_keyval</cascolumn>
+		</column>
+		<column>
+			<srccolumn>SuperiorOrderShortDescription</srccolumn>
+			<cascolumn>
+				(CASE
+					WHEN CASDBA.F_EQUIPGROUP_HIGHEST_PARENT(mxo.equip_id) IS NOT NULL and mxo.gentype_cd != 'M'
+						THEN (SELECT substring(critgrp_name, 1, 40) 
+								FROM casdba.criteriagroup cg
+								JOIN casdba.triggervalues tv ON tv.critgrp_id = cg.critgrp_id
+								WHERE tv.triggerval_id = mxo.triggerval_id)
+					WHEN mxo.gentype_cd = 'M' THEN 'Manual MxOrder'
+					ELSE
+						(SELECT SUBSTRING (critgrp_name, 1, 40) 
+						FROM casdba.criteriagroup cg
+						JOIN casdba.triggervalues tv ON tv.critgrp_id = cg.critgrp_id
+						JOIN casdba.mxorder mxo2 ON tv.triggerval_id = mxo2.triggerval_id
+						WHERE mxo2.mxorder_id = mxo.mxorder_id)
+				END) AS sosd
+			</cascolumn>
+		</column>
+		<column>
+			<srccolumn>comments</srccolumn>
+			<cascolumn>mxo.comments</cascolumn>
+		</column>
+		<column>
+			<srccolumn>mx_priority</srccolumn>
+			<cascolumn>mxo.customer_priority</cascolumn>
+		</column>
+		<cascadefrom>
+			casdba.mxorder mxo
+			join dbo.V_AH_FunctionalLocation_Flex vf on mxo.mxorder_nr  =  vf.mxorder_nr
+			join casdba.mxproc mxp on mxo.mxproc_id=mxp.mxproc_id
+			join casdba.all_equip aeq on mxo.equip_id=aeq.equip_id
+			left outer join casdba.activity act on mxo.activ_id = act.activ_id
+			left outer join casdba.account acnt on mxp.acnt_id = acnt.acnt_id
+			left outer join AH_FunctionalLocation_Work_Estimates ahwe on ahwe.FunctionalLocation = 
+				vf.FunctionalLocation and ahwe.ProcedureName = mxp.mxproc_nm
+		</cascadefrom>
+		<cascadewhere>
+			mxo.status_cd not in  ('CAN') and
+			mxo.schedule_dt is not null and
+			not exists (select * from casdba.mxorder_export_status where casdba.mxorder_export_status.mxorder_id = mxo.mxorder_id and
+						casdba.mxorder_export_status.export_status = 'S' )
+		</cascadewhere> 
+		<notify table="casdba.mxorder_export_status">
+			<notifycolumn key="true">mxorder_id</notifycolumn><cascolumn>mxorder_id</cascolumn>
+			<notifycolumn>export_status</notifycolumn><cascolumn>'S'</cascolumn>
+		</notify>
+	</export_casquery>
+	
+	<export_casquery name="ExportMxOrdersAdds_nulls">
+		<exportdef>
+			<srctabledef name="MxOrders" tablename="AH_CascadeToSAP_OrderAdds"/>
+		</exportdef>
+		<srctable name="MxOrders"/>
+			<action>upsert</action>
+		<column key="true">
+			<srccolumn>CascadeOrderNumber</srccolumn>
+			<cascolumn>mxo.mxorder_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>Description</srccolumn>
+			<cascolumn>mxp.mxproc_nm</cascolumn>
+		</column>	
+		<column>
+			<srccolumn>Equipment</srccolumn>
+			<cascolumn>aeq.sapobjectid</cascolumn>
+		</column>
+		<column>
+			<srccolumn>FunctionalLocation</srccolumn>
+			<cascolumn>position.pos_no</cascolumn>
+		</column>
+		<column>
+			<srccolumn>CascadePriority</srccolumn>
+			<cascolumn>mxo.priority_nbr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>WorkCenter</srccolumn>
+			<cascolumn>mxo.CREWTYPE_CD</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ActivityType</srccolumn>
+			<cascolumn>act.activ_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>NumberofPeople</srccolumn>
+			<cascolumn>coalesce(mxp.mxproc_nr, 1)</cascolumn>
+		</column>
+		<column>
+			<srccolumn>Duration</srccolumn>
+			<cascolumn>coalesce(ahwe.workestimate, mxo.STDEST_HR, 0)</cascolumn>
+		</column>
+		<column>
+			<srccolumn>BasicStartDatetime</srccolumn>
+			<cascolumn>mxo.gen_date</cascolumn>
+		</column>
+		<column>
+			<srccolumn>JobType</srccolumn>
+			<cascolumn>acnt.acnt_nr</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ProcedureID</srccolumn>
+			<cascolumn>mxo.MxProc_ID</cascolumn>
+		</column>
+		<column>
+			<srccolumn>ParentEquipmentID</srccolumn>
+			<cascolumn>
+				(CASE 
+					WHEN CASDBA.F_EQUIPGROUP_HIGHEST_PARENT(mxo.equip_id) IS NOT NULL THEN CASDBA.F_EQUIPGROUP_HIGHEST_PARENT(mxo.equip_id)
+					ELSE mxo.equip_id
+				END) AS peid
+			</cascolumn>
+		</column>
+		<column>
+			<srccolumn>SuperiorOrderNumber</srccolumn>
+			<cascolumn>mxo.wm_interface_keyval</cascolumn>
+		</column>
+		<column>
+			<srccolumn>SuperiorOrderShortDescription</srccolumn>
+			<cascolumn>
+				(CASE 
+					WHEN casdba.f_equipgroup_highest_parent(mxo.equip_id) IS NOT NULL and mxo.gentype_cd != 'M'
+						THEN (SELECT substring(critgrp_name, 1, 40) FROM casdba.criteriagroup
+						JOIN casdba.triggervalues ON triggervalues.critgrp_id = criteriagroup.critgrp_id
+						WHERE triggervalues.triggerval_id = mxo.triggerval_id)				  
+					WHEN mxo.gentype_cd = 'M' THEN 'Manual MxOrder'
+					ELSE (SELECT SUBSTRING (critgrp_name, 1, 40) 
+							FROM casdba.criteriagroup
+							JOIN casdba.triggervalues ON triggervalues.critgrp_id = criteriagroup.critgrp_id
+							JOIN casdba.mxorder mxo2 ON triggervalues.triggerval_id = mxo2.triggerval_id
+							WHERE mxo2.mxorder_id = mxo.mxorder_id)
+					END) AS sosd
+			</cascolumn>
+		</column>
+		<column>
+			<srccolumn>COMMENTS</srccolumn>
+			<cascolumn>mxo.comments</cascolumn>
+		</column>
+		<column>
+			<srccolumn>mx_priority</srccolumn>
+			<cascolumn>mxo.customer_priority</cascolumn>
+		</column>
+		<cascadefrom>
+			casdba.mxorder mxo
+			join casdba.mxproc mxp on mxo.mxproc_id=mxp.mxproc_id
+			join casdba.all_equip aeq on mxo.equip_id=aeq.equip_id
+			join casdba.equipment on mxo.equip_id=equipment.equip_id
+			left outer join casdba.position on position.position_id = equipment.position_id
+			left outer join casdba.activity act on mxo.activ_id = act.activ_id
+			left outer join casdba.account acnt on mxp.acnt_id = acnt.acnt_id
+			left outer join AH_FunctionalLocation_Work_Estimates ahwe on casdba.position.pos_no = ahwe.FunctionalLocation 
+				and ahwe.ProcedureName = mxp.mxproc_nm
+		</cascadefrom>
+		<cascadewhere>
+			mxo.status_cd not in  ('CAN') and
+			mxo.schedule_dt is not null	and
+			not exists (select * from casdba.mxorder_export_status where casdba.mxorder_export_status.mxorder_id = mxo.mxorder_id 
+						and casdba.mxorder_export_status.export_status = 'S' )  
+		</cascadewhere>
+		<notify table="casdba.mxorder_export_status">
+			<notifycolumn key="true">mxorder_id</notifycolumn><cascolumn>mxorder_id</cascolumn>
+			<notifycolumn>export_status</notifycolumn><cascolumn>'S'</cascolumn>
+		</notify>
+	</export_casquery>		
+	
+	<executesqlcommand database="cascade" name="Post-processing: Updating AH_CascadeToSAP_OrderAdds BasicStartDatetime values..">
+		update AH_CascadeToSAP_OrderAdds set BasicStartDatetime = mxo.schedule_dt
+		from AH_CascadeToSAP_OrderAdds
+		join mxorder mxo on mxo.mxorder_nr = AH_CascadeToSAP_OrderAdds.CascadeOrderNumber
+		where mxo.schedule_dt is not null
+	</executesqlcommand>
+
+	<executesqlcommand database="integrationsource" name="NBMxoAdds completed">
+		select getdate()
+	</executesqlcommand>
+
+</integrations>

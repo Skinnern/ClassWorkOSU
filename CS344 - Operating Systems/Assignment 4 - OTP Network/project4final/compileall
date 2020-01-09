@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Compile Program 4 Files
+#compile keygen
+gcc keygen.c -o keygen 
+
+#compile encoder
+gcc otp_enc_d.c -o otp_enc_d
+
+#compile decoder
+gcc otp_dec_d.c -o otp_dec_d
+
+#compile encoder
+gcc otp_enc.c -o otp_enc 
+
+#compile decoder
+gcc otp_dec.c -o otp_dec 

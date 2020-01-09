@@ -1,0 +1,27 @@
+Graescale: //Clear rooms data, then read data back into structs from files
+Graescale: for (i=0;i<7;i++)
+Graescale: //Get file name
+sprintf(fileDir,"bonnersa.%d.room%d",getpid(),i);
+FILE *fp = fopen(fileDir, "r+");
+Graescale: if ( rooms[i].name[0] == '\0' )
+sscanf(line,"ROOM NAME: %s",rooms[i].name);
+Graescale: if ( rooms[i].cons[0][0] == '\0' )
+sscanf(line,"CONNECTION 0: %s",rooms[i].cons[0]);
+Mianton: hrmm
+Graescale: i did this in a really lazy way
+Graescale: etc for connections
+Graescale: //Check if start room or end room and save to variable
+to variable
+if (rooms[i].type[0] == 'S')
+startR = i;
+else if (rooms[i].type[0] == 'E')
+endR = i;
+
+fclose(fp);
+Mianton: kek
+Mianton: he's having us write out START_ROOM and END_ROOM
+Graescale: thats really easy
+Graescale: you can see i just had a type
+Graescale: you can print it out or whatever
+Graescale: or just look for START_ROOM
+Graescale: etc
