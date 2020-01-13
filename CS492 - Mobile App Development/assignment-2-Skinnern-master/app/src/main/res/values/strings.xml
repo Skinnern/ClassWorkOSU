@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Weather Search</string>
+    <string name="search_box_hint">Search OpenWeather...</string>
+    <string name="search_button_text">Do Search</string>
+    <string name="loading_error">Unable to run query.  Check internet.</string>
+    <string name="action_share">Share</string>
+    <string name="action_view_on_web">View this on OpenWeather</string>
+    <string name="share_chooser_title">How do you want to share this Info?</string>
+    <string name="share_repo_text">%1$s: %2$s</string>
+</resources>
